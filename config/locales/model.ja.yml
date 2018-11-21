@@ -1,0 +1,13 @@
+ja:
+  activerecord:
+    models:
+      task: "ブログ"
+    attributes:
+      task:
+        name: "名前"
+        content: "内容"
+
+
+ja:
+  view:
+    sample: さんぷるサンプル

@@ -28,5 +28,7 @@ module Manyo
       g.fixture_replacement :factory_bot, dir: "spec/factories"
     end
 
+    # step9 辞書機能
+    config.i18n.default_locale = :ja
   end
 end
