@@ -5,7 +5,7 @@
 ruby 2.5.3p105 (2018-10-18 revision 65156) [x86_64-darwin16]
 Rails 5.2.1
 ```
-
+  
 ## 設計書
 https://docs.google.com/spreadsheets/d/1kX6JYpMjxbjaV0LmtLJMRyZRheTFpt7DdjHXQgSSQrE/edit#gid=1666825416
 
