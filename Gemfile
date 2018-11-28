@@ -47,6 +47,9 @@ group :development, :test do
   gem 'rspec-rails'
   gem 'spring-commands-rspec'
 
+  # step13追加
+  gem 'dotenv-rails'
+
 end
 
 group :development do
