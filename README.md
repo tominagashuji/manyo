@@ -15,7 +15,7 @@ https://docs.google.com/spreadsheets/d/1kX6JYpMjxbjaV0LmtLJMRyZRheTFpt7DdjHXQgSS
 http_basic_authenticate_with :name => ENV['BASIC_AUTH_USERNAME'], :password => ENV['BASIC_AUTH_PASSWORD'] if Rails.env == "production"
 ```
 
-### herokuとGitHub連携手順の
+### herokuとGitHub連携手順
 https://j-hack.gitbooks.io/deploy-meteor-app-to-heroku/content/step4.html
 
 ### herokuデプロイ手順の整理
