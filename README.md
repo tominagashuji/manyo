@@ -20,6 +20,7 @@ https://j-hack.gitbooks.io/deploy-meteor-app-to-heroku/content/step4.html
 
 ### herokuデプロイ手順の整理
 ```
+
 1. git init
 実行、その後に ls -a で . .. .git のファイル？を存在確認する
 設定状態も確認する
