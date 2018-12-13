@@ -19,4 +19,16 @@ FactoryBot.define do
     content { 'samplesample3' }
   end
 
+  factory :limit_on_sort01, class: Task do
+    name { 'limit_on_sort01_name' }
+    content { 'limit_on_sort01_content' }
+    limit_on { '20000101' }
+  end
+
+  factory :limit_on_sort02, class: Task do
+    name { 'limit_on_sort02_name' }
+    content { 'limit_on_sort02_content' }
+    limit_on { '21111111' }
+  end
+
 end
