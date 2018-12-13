@@ -50,6 +50,10 @@ group :development, :test do
   # step13追加
   gem 'dotenv-rails'
 
+  # step14追加
+  gem 'pry-rails'
+  gem 'better_errors'
+  gem 'binding_of_caller'
 end
 
 group :development do
