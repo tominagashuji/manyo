@@ -4,12 +4,14 @@
   <tr>
     <th>名前</th>
     <th>内容</th>
+    <th>終了期限</th>
   </tr>
 
 <% @tasks.each do |task| %>
   <tr>
     <td><%= task.name %></td>
     <td><%= task.content %></td>
+    <td><%= task.limit_on %></td>
 
     <td><%= link_to '詳細', task_path(task.id) %></td>
     <td><%= link_to '編集', edit_task_path(task.id), data: {confirm: '編集確認'} %></td>
@@ -18,6 +20,8 @@
 <% end %>
 </table>
 
-<%= link_to 'タスク一覧画面に戻る', tasks_path %>
+<p><%= link_to 'タスクを作成する', new_task_path %></p>
+<p><%= link_to "終了期限でソートする", tasks_path(sort_expired: "true") %></p>
+<p><%= link_to 'タスク一覧画面に戻る', tasks_path %></p>
 
 <%= t('view.sample') %>

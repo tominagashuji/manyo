@@ -41,7 +41,6 @@ RSpec.feature "タスク管理機能",type: :feature do
     click_on '詳細'
     expect(page).to have_content 'testtesttest1'
     expect(page).to have_content 'samplesample1'
-    save_and_open_page
   end
 
   scenario "タスクが作成日時の降順に並んでいるかのテスト" do
@@ -54,5 +53,22 @@ RSpec.feature "タスク管理機能",type: :feature do
     expect(page).to have_content 'samplesample2'
     expect(page).to have_content 'testtesttest1'
     expect(page).to have_content 'samplesample1'
+  end
+
+  scenario "終了期限でソートするボタンのテスト" do
+    FactoryBot.create(:limit_on_sort01)
+    FactoryBot.create(:limit_on_sort02)
+    visit tasks_path
+    click_on '終了期限でソートする'
+    save_and_open_page
+    expect(page).to have_content 'limit_on_sort02_name'
+    expect(page).to have_content 'limit_on_sort02_content'
+    expect(page).to have_content '2111-11-11'
+    expect(page).to have_content 'limit_on_sort01_name'
+    expect(page).to have_content 'limit_on_sort01_content'
+    expect(page).to have_content '2000-01-01'
+    expect(page).to have_content 'testtesttest1'
+    expect(page).to have_content 'samplesample1'
+    expect(page).to have_content '1900-01-01'
   end
 end
