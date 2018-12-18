@@ -55,12 +55,22 @@ RSpec.feature "タスク管理機能",type: :feature do
     expect(page).to have_content 'samplesample1'
   end
 
+  scenario "終了期限作成テスト" do
+    visit new_task_path
+    fill_in 'task_name', with: 'name'
+    fill_in 'task_content', with: 'content'
+    fill_in 'task_limit_on', with: DateTime.new(2011, 12, 24).yesterday
+    click_on '登録する'
+    visit tasks_path
+    expect(page).to have_content '2011-12-23'
+    save_and_open_page
+  end
+
   scenario "終了期限でソートするボタンのテスト" do
     FactoryBot.create(:limit_on_sort01)
     FactoryBot.create(:limit_on_sort02)
     visit tasks_path
     click_on '終了期限でソートする'
-    save_and_open_page
     expect(page).to have_content 'limit_on_sort02_name'
     expect(page).to have_content 'limit_on_sort02_content'
     expect(page).to have_content '2111-11-11'
