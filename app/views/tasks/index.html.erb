@@ -5,6 +5,7 @@
     <th>名前</th>
     <th>内容</th>
     <th>終了期限</th>
+    <th>ステータス</th>
   </tr>
 
 <% @tasks.each do |task| %>
@@ -12,6 +13,7 @@
     <td><%= task.name %></td>
     <td><%= task.content %></td>
     <td><%= task.limit_on %></td>
+    <td><%= task.status %></td>
 
     <td><%= link_to '詳細', task_path(task.id) %></td>
     <td><%= link_to '編集', edit_task_path(task.id), data: {confirm: '編集確認'} %></td>
