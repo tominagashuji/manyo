@@ -37,7 +37,7 @@ class TasksController < ApplicationController
     redirect_to tasks_path, notice:"タスク削除済み"
   end
 
-  def status
+  def search
     if params[:task][:name].present? && params[:task][:status].present?
       @tasks = Task.name_status_search(params[:task][:name],params[:task][:status])
       render "index"
