@@ -37,6 +37,21 @@ class TasksController < ApplicationController
     redirect_to tasks_path, notice:"タスク削除済み"
   end
 
+  def status
+    if params[:task][:name].present? && params[:task][:status].present?
+      @tasks = Task.name_status_search(params[:task][:name],params[:task][:status])
+      render "index"
+    elsif params[:task][:name].present?
+      @tasks = Task.name_search(params[:task][:name])
+      render "index"
+    elsif params[:task][:status].present?
+      @tasks = Task.status_search(params[:task][:status])
+      render "index"
+    elsif params[:task][:name].blank? && params[:task][:status].blank?
+      redirect_to tasks_path, notice: t("flash.blank")
+    end
+  end
+
   private
 
   def task_params
