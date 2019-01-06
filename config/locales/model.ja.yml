@@ -7,7 +7,15 @@ ja:
         name: "名前"
         content: "内容"
 
-
 ja:
   view:
     sample: さんぷるサンプル
+  enum:
+    task:
+      status:
+        Nowork: "未着手"
+        Work: "着手中"
+        Comp: "完了"
+        nowork: "未着手"
+        work: "着手中"
+        comp: "完了"

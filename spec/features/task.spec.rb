@@ -55,6 +55,7 @@ RSpec.feature "タスク管理機能",type: :feature do
     expect(page).to have_content 'samplesample1'
   end
 
+  # RSpec.feature "終了期限テスト",type: :feature do
   scenario "終了期限作成テスト" do
     visit new_task_path
     fill_in 'task_name', with: 'name'
@@ -81,6 +82,7 @@ RSpec.feature "タスク管理機能",type: :feature do
     expect(page).to have_content '1900-01-01'
   end
 
+  # RSpec.feature "検索機能テスト",type: :feature do
   scenario "名前検索テスト" do
     FactoryBot.create(:search_01)
     FactoryBot.create(:search_02)
