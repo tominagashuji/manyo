@@ -105,14 +105,14 @@ RSpec.feature "タスク管理機能",type: :feature do
     FactoryBot.create(:search_03)
     FactoryBot.create(:search_04)
     visit tasks_path
-    select 'Comp', from: 'task[status]'
+    select '完了', from: 'task[status]'
     click_on '検索する'
     expect(page).to have_content 'search_name01'
     expect(page).to have_content '2000-01-03'
-    expect(page).to have_content 'comp'
+    expect(page).to have_content '完了'
     expect(page).to have_content 'search_name04'
     expect(page).to have_content '2000-01-04'
-    expect(page).to have_content 'comp'
+    expect(page).to have_content '完了'
   end
 
   scenario "名前、ステータス同時検索テスト" do
@@ -122,11 +122,11 @@ RSpec.feature "タスク管理機能",type: :feature do
     FactoryBot.create(:search_04)
     visit tasks_path
     fill_in 'task_name', with: 'search_name02'
-    select 'Work', from: 'task[status]'
+    select '着手中', from: 'task[status]'
     click_on '検索する'
     expect(page).to have_content 'search_name02'
     expect(page).to have_content '2000-01-02'
-    expect(page).to have_content 'work'
+    expect(page).to have_content '着手中'
     save_and_open_page
   end
 
