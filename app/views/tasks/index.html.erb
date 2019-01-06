@@ -1,10 +1,19 @@
 <h1>タスク一覧</h1>
 
+<%= form_with(model: Task.new, url: search_tasks_path, method: :get, local: true) do |f| %>
+  <%= f.label :name_search, t("index.name_search") %>
+  <%= f.text_field :name %>
+  <%= f.label :status_search, t("index.status_search") %>
+  <%= f.select :status, Task.statuses_i18n.invert, include_blank: true, selected: "" %>
+  <%= f.submit t('index.search') %>
+<% end %>
+
 <table>
   <tr>
     <th>名前</th>
     <th>内容</th>
     <th>終了期限</th>
+    <th>ステータス</th>
   </tr>
 
 <% @tasks.each do |task| %>
@@ -12,16 +21,17 @@
     <td><%= task.name %></td>
     <td><%= task.content %></td>
     <td><%= task.limit_on %></td>
+    <td><%= task.status %></td>
 
-    <td><%= link_to '詳細', task_path(task.id) %></td>
-    <td><%= link_to '編集', edit_task_path(task.id), data: {confirm: '編集確認'} %></td>
-    <td><%= link_to '削除', task_path(task.id), method: :delete ,data: {confirm: "削除確認"} %></td>
+    <td><%= link_to t('index.show'), task_path(task.id) %></td>
+    <td><%= link_to t('index.edit'), edit_task_path(task.id), data: {confirm: '編集確認'} %></td>
+    <td><%= link_to t('index.delete'), task_path(task.id), method: :delete ,data: {confirm: "削除確認"} %></td>
   </tr>
 <% end %>
 </table>
 
-<p><%= link_to 'タスクを作成する', new_task_path %></p>
-<p><%= link_to "終了期限でソートする", tasks_path(sort_expired: "true") %></p>
-<p><%= link_to 'タスク一覧画面に戻る', tasks_path %></p>
+<p><%= link_to t('index.new'), new_task_path %></p>
+<p><%= link_to t('index.limit_on_sort'), tasks_path(sort_expired: "true") %></p>
+<p><%= link_to t('index.index'), tasks_path %></p>
 
 <%= t('view.sample') %>

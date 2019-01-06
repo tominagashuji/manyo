@@ -55,6 +55,7 @@ RSpec.feature "タスク管理機能",type: :feature do
     expect(page).to have_content 'samplesample1'
   end
 
+  # RSpec.feature "終了期限テスト",type: :feature do
   scenario "終了期限作成テスト" do
     visit new_task_path
     fill_in 'task_name', with: 'name'
@@ -63,7 +64,6 @@ RSpec.feature "タスク管理機能",type: :feature do
     click_on '登録する'
     visit tasks_path
     expect(page).to have_content '2011-12-23'
-    save_and_open_page
   end
 
   scenario "終了期限でソートするボタンのテスト" do
@@ -81,4 +81,53 @@ RSpec.feature "タスク管理機能",type: :feature do
     expect(page).to have_content 'samplesample1'
     expect(page).to have_content '1900-01-01'
   end
+
+  # RSpec.feature "検索機能テスト",type: :feature do
+  scenario "名前検索テスト" do
+    FactoryBot.create(:search_01)
+    FactoryBot.create(:search_02)
+    FactoryBot.create(:search_03)
+    FactoryBot.create(:search_04)
+    visit tasks_path
+    fill_in 'task_name', with: 'search_name01'
+    click_on '検索する'
+    expect(page).to have_content 'search_name01'
+    expect(page).to have_content '2000-01-01'
+    expect(page).to have_content 'nowork'
+    expect(page).to have_content 'search_name01'
+    expect(page).to have_content '2000-01-03'
+    expect(page).to have_content 'comp'
+  end
+
+  scenario "ステータス検索テスト" do
+    FactoryBot.create(:search_01)
+    FactoryBot.create(:search_02)
+    FactoryBot.create(:search_03)
+    FactoryBot.create(:search_04)
+    visit tasks_path
+    select '完了', from: 'task[status]'
+    click_on '検索する'
+    expect(page).to have_content 'search_name01'
+    expect(page).to have_content '2000-01-03'
+    expect(page).to have_content '完了'
+    expect(page).to have_content 'search_name04'
+    expect(page).to have_content '2000-01-04'
+    expect(page).to have_content '完了'
+  end
+
+  scenario "名前、ステータス同時検索テスト" do
+    FactoryBot.create(:search_01)
+    FactoryBot.create(:search_02)
+    FactoryBot.create(:search_03)
+    FactoryBot.create(:search_04)
+    visit tasks_path
+    fill_in 'task_name', with: 'search_name02'
+    select '着手中', from: 'task[status]'
+    click_on '検索する'
+    expect(page).to have_content 'search_name02'
+    expect(page).to have_content '2000-01-02'
+    expect(page).to have_content '着手中'
+    save_and_open_page
+  end
+
 end

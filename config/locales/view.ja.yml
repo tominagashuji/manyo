@@ -1,0 +1,19 @@
+ja:
+  view:
+    sample: さんぷるサンプル
+  index:
+    show: 詳細
+    edit: 編集
+    delete: 削除
+    new: タスクを作成する
+    index: タスク一覧画面に戻る
+    limit_on_sort: 終了期限でソートする
+    search: 検索する
+    name_search: 名前検索
+    status_search: ステータス検索
+  enums:
+    task:
+      status:
+        nowork: "未着手"
+        work: "着手中"
+        comp: "完了"
