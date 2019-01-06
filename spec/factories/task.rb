@@ -31,4 +31,32 @@ FactoryBot.define do
     limit_on { '21111111' }
   end
 
+  factory :search_01, class: Task do
+    name { 'search_name01' }
+    content { 'search_content01' }
+    limit_on { '20000101' }
+    status { 'nowork' }
+  end
+
+  factory :search_02, class: Task do
+    name { 'search_name02' }
+    content { 'search_content02' }
+    limit_on { '20000102' }
+    status { 'work' }
+  end
+
+  factory :search_03, class: Task do
+    name { 'search_name01' }
+    content { 'search_content01' }
+    limit_on { '20000103' }
+    status { 'comp' }
+  end
+
+  factory :search_04, class: Task do
+    name { 'search_name04' }
+    content { 'search_content04' }
+    limit_on { '20000104' }
+    status { 'comp' }
+  end
+
 end
