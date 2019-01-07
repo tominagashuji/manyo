@@ -14,6 +14,7 @@
     <th>内容</th>
     <th>終了期限</th>
     <th>ステータス</th>
+    <th>優先度</th>
   </tr>
 
 <% @tasks.each do |task| %>
@@ -21,7 +22,8 @@
     <td><%= task.name %></td>
     <td><%= task.content %></td>
     <td><%= task.limit_on %></td>
-    <td><%= task.status %></td>
+    <td><%= task.status_i18n %></td>
+    <td><%= task.priority_i18n %></td>
 
     <td><%= link_to t('index.show'), task_path(task.id) %></td>
     <td><%= link_to t('index.edit'), edit_task_path(task.id), data: {confirm: '編集確認'} %></td>
@@ -32,6 +34,7 @@
 
 <p><%= link_to t('index.new'), new_task_path %></p>
 <p><%= link_to t('index.limit_on_sort'), tasks_path(sort_expired: "true") %></p>
+<p><%= link_to t('index.priority_sort'), tasks_path(sort_priority: "true") %></p>
 <p><%= link_to t('index.index'), tasks_path %></p>
 
 <%= t('view.sample') %>

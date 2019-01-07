@@ -15,6 +15,10 @@
     <%= form.label :status %>
     <%= form.select :status, Task.statuses_i18n.invert %>
   </div>
+  <div class="task_priority">
+    <%= form.label :priority %>
+    <%= form.select :priority, Task.priorities_i18n.invert %>
+  </div>
 
   <%= form.submit %>
 <% end %>

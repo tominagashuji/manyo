@@ -36,6 +36,7 @@ FactoryBot.define do
     content { 'search_content01' }
     limit_on { '20000101' }
     status { 'nowork' }
+    priority { 'low' }
   end
 
   factory :search_02, class: Task do
@@ -43,6 +44,7 @@ FactoryBot.define do
     content { 'search_content02' }
     limit_on { '20000102' }
     status { 'work' }
+    priority {'medium'}
   end
 
   factory :search_03, class: Task do
@@ -50,6 +52,7 @@ FactoryBot.define do
     content { 'search_content01' }
     limit_on { '20000103' }
     status { 'comp' }
+    priority {'high'}
   end
 
   factory :search_04, class: Task do

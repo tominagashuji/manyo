@@ -8,3 +8,4 @@ ja:
         content: "内容"
         limit_on: 終了期限
         status: ステータス
+        priority: 優先度

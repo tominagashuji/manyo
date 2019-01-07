@@ -54,8 +54,15 @@ RSpec.feature "タスク管理機能",type: :feature do
     expect(page).to have_content 'testtesttest1'
     expect(page).to have_content 'samplesample1'
   end
+end
 
-  # RSpec.feature "終了期限テスト",type: :feature do
+RSpec.feature "終了期限テスト",type: :feature do
+  background do
+    FactoryBot.create(:task)
+    FactoryBot.create(:limit_on_sort01)
+    FactoryBot.create(:limit_on_sort02)
+  end
+
   scenario "終了期限作成テスト" do
     visit new_task_path
     fill_in 'task_name', with: 'name'
@@ -67,8 +74,6 @@ RSpec.feature "タスク管理機能",type: :feature do
   end
 
   scenario "終了期限でソートするボタンのテスト" do
-    FactoryBot.create(:limit_on_sort01)
-    FactoryBot.create(:limit_on_sort02)
     visit tasks_path
     click_on '終了期限でソートする'
     expect(page).to have_content 'limit_on_sort02_name'
@@ -81,29 +86,29 @@ RSpec.feature "タスク管理機能",type: :feature do
     expect(page).to have_content 'samplesample1'
     expect(page).to have_content '1900-01-01'
   end
+end
 
-  # RSpec.feature "検索機能テスト",type: :feature do
-  scenario "名前検索テスト" do
+RSpec.feature "検索機能テスト",type: :feature do
+  background do
     FactoryBot.create(:search_01)
     FactoryBot.create(:search_02)
     FactoryBot.create(:search_03)
     FactoryBot.create(:search_04)
+  end
+
+  scenario "名前検索テスト" do
     visit tasks_path
     fill_in 'task_name', with: 'search_name01'
     click_on '検索する'
     expect(page).to have_content 'search_name01'
     expect(page).to have_content '2000-01-01'
-    expect(page).to have_content 'nowork'
+    expect(page).to have_content '未着手'
     expect(page).to have_content 'search_name01'
     expect(page).to have_content '2000-01-03'
-    expect(page).to have_content 'comp'
+    expect(page).to have_content '完了'
   end
 
   scenario "ステータス検索テスト" do
-    FactoryBot.create(:search_01)
-    FactoryBot.create(:search_02)
-    FactoryBot.create(:search_03)
-    FactoryBot.create(:search_04)
     visit tasks_path
     select '完了', from: 'task[status]'
     click_on '検索する'
@@ -116,10 +121,6 @@ RSpec.feature "タスク管理機能",type: :feature do
   end
 
   scenario "名前、ステータス同時検索テスト" do
-    FactoryBot.create(:search_01)
-    FactoryBot.create(:search_02)
-    FactoryBot.create(:search_03)
-    FactoryBot.create(:search_04)
     visit tasks_path
     fill_in 'task_name', with: 'search_name02'
     select '着手中', from: 'task[status]'
@@ -128,6 +129,22 @@ RSpec.feature "タスク管理機能",type: :feature do
     expect(page).to have_content '2000-01-02'
     expect(page).to have_content '着手中'
     save_and_open_page
+  end
+end
+
+RSpec.feature "優先度ソートテスト",type: :feature do
+  background do
+    FactoryBot.create(:search_01)
+    FactoryBot.create(:search_02)
+    FactoryBot.create(:search_03)
+  end
+
+  scenario "優先順位ソート" do
+    visit tasks_path
+    click_on '優先度でソートする'
+    expect(page).to have_content '高'
+    expect(page).to have_content '中'
+    expect(page).to have_content '低'
   end
 
 end
