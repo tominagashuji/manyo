@@ -102,10 +102,10 @@ RSpec.feature "検索機能テスト",type: :feature do
     click_on '検索する'
     expect(page).to have_content 'search_name01'
     expect(page).to have_content '2000-01-01'
-    expect(page).to have_content 'nowork'
+    expect(page).to have_content '未着手'
     expect(page).to have_content 'search_name01'
     expect(page).to have_content '2000-01-03'
-    expect(page).to have_content 'comp'
+    expect(page).to have_content '完了'
   end
 
   scenario "ステータス検索テスト" do
@@ -129,6 +129,22 @@ RSpec.feature "検索機能テスト",type: :feature do
     expect(page).to have_content '2000-01-02'
     expect(page).to have_content '着手中'
     save_and_open_page
+  end
+end
+
+RSpec.feature "優先度ソートテスト",type: :feature do
+  background do
+    FactoryBot.create(:search_01)
+    FactoryBot.create(:search_02)
+    FactoryBot.create(:search_03)
+  end
+
+  scenario "優先順位ソート" do
+    visit tasks_path
+    click_on '優先度でソートする'
+    expect(page).to have_content '高'
+    expect(page).to have_content '中'
+    expect(page).to have_content '低'
   end
 
 end
