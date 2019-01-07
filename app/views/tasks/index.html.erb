@@ -8,12 +8,6 @@
   <%= f.submit t('index.search') %>
 <% end %>
 
-<%= form_with(model: Task.new, url: search_tasks_path, method: :get, local: true) do |f| %>
-  <%= f.label :priority_search, t('index.priority_search') %>
-  <%= f.select :priority_search, Task.priorities_i18n.invert, include_blank: true, selected: "" %>
-  <%= f.submit t('index.search') %>
-<% end %>
-
 <table>
   <tr>
     <th>名前</th>
@@ -40,6 +34,7 @@
 
 <p><%= link_to t('index.new'), new_task_path %></p>
 <p><%= link_to t('index.limit_on_sort'), tasks_path(sort_expired: "true") %></p>
+<p><%= link_to t('index.priority_sort'), tasks_path(sort_priority: "true") %></p>
 <p><%= link_to t('index.index'), tasks_path %></p>
 
 <%= t('view.sample') %>
