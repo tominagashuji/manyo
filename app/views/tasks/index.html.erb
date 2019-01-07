@@ -28,8 +28,8 @@
     <td><%= task.name %></td>
     <td><%= task.content %></td>
     <td><%= task.limit_on %></td>
-    <td><%= task.status %></td>
-    <td><%= task.priority %></td>
+    <td><%= task.status_i18n %></td>
+    <td><%= task.priority_i18n %></td>
 
     <td><%= link_to t('index.show'), task_path(task.id) %></td>
     <td><%= link_to t('index.edit'), edit_task_path(task.id), data: {confirm: '編集確認'} %></td>
