@@ -8,12 +8,19 @@
   <%= f.submit t('index.search') %>
 <% end %>
 
+<%= form_with(model: Task.new, url: search_tasks_path, method: :get, local: true) do |f| %>
+  <%= f.label :priority_search, t('index.priority_search') %>
+  <%= f.select :priority_search, Task.priorities_i18n.invert, include_blank: true, selected: "" %>
+  <%= f.submit t('index.search') %>
+<% end %>
+
 <table>
   <tr>
     <th>名前</th>
     <th>内容</th>
     <th>終了期限</th>
     <th>ステータス</th>
+    <th>優先度</th>
   </tr>
 
 <% @tasks.each do |task| %>
@@ -22,6 +29,7 @@
     <td><%= task.content %></td>
     <td><%= task.limit_on %></td>
     <td><%= task.status %></td>
+    <td><%= task.priority %></td>
 
     <td><%= link_to t('index.show'), task_path(task.id) %></td>
     <td><%= link_to t('index.edit'), edit_task_path(task.id), data: {confirm: '編集確認'} %></td>
