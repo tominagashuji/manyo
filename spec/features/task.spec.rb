@@ -3,7 +3,7 @@
 require 'rails_helper'
 
 #このRSぺc。reatureの右側にテスト項目の名称を書きます(do~end でグループ化されてる)
-RSpec.feature "タスク管理機能",type: :feature do
+RSpec.feature "1.タスク管理機能",type: :feature do
   #scenario(itのalias)の中に、確認したい各項目のテストの処理を書きます。
   background do
     #あらかじめタスク一覧のテストで使用するためのタスクを二つ作った！
@@ -56,7 +56,7 @@ RSpec.feature "タスク管理機能",type: :feature do
   end
 end
 
-RSpec.feature "終了期限テスト",type: :feature do
+RSpec.feature "2.終了期限テスト",type: :feature do
   background do
     FactoryBot.create(:task)
     FactoryBot.create(:limit_on_sort01)
@@ -88,7 +88,7 @@ RSpec.feature "終了期限テスト",type: :feature do
   end
 end
 
-RSpec.feature "検索機能テスト",type: :feature do
+RSpec.feature "3.検索機能テスト",type: :feature do
   background do
     FactoryBot.create(:search_01)
     FactoryBot.create(:search_02)
@@ -132,7 +132,7 @@ RSpec.feature "検索機能テスト",type: :feature do
   end
 end
 
-RSpec.feature "優先度ソートテスト",type: :feature do
+RSpec.feature "4.優先度ソートテスト",type: :feature do
   background do
     FactoryBot.create(:search_01)
     FactoryBot.create(:search_02)
@@ -146,5 +146,21 @@ RSpec.feature "優先度ソートテスト",type: :feature do
     expect(page).to have_content '中'
     expect(page).to have_content '低'
   end
+end
 
+RSpec.feature "5.ページネーションテスト",type: :feature do
+  background do
+    FactoryBot.create(:pagenation_01)
+    FactoryBot.create(:pagenation_02)
+    FactoryBot.create(:pagenation_03)
+    FactoryBot.create(:pagenation_04)
+    FactoryBot.create(:pagenation_05)
+    FactoryBot.create(:pagenation_06)
+  end
+
+  scenario "ページネーション動作確認" do
+    visit tasks_path
+    click_on 'next page'
+    expect(page).to have_content 'pagenation_name_06'
+  end
 end

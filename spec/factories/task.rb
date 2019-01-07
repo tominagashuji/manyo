@@ -62,4 +62,29 @@ FactoryBot.define do
     status { 'comp' }
   end
 
+  factory :pagenation_01, class: Task do
+    name {'pagenation_name_01'}
+    content {'pagenation_content_01'}
+  end
+  factory :pagenation_02, class: Task do
+    name {'pagenation_name_02'}
+    content {'pagenation_content_02'}
+  end
+  factory :pagenation_03, class: Task do
+    name {'pagenation_name_03'}
+    content {'pagenation_content_03'}
+  end
+  factory :pagenation_04, class: Task do
+    name {'pagenation_name_04'}
+    content {'pagenation_content_04'}
+  end
+  factory :pagenation_05, class: Task do
+    name {'pagenation_name_05'}
+    content {'pagenation_content_05'}
+  end
+  factory :pagenation_06, class: Task do
+    name {'pagenation_name_06'}
+    content {'pagenation_content_06'}
+  end
+
 end
