@@ -28,3 +28,6 @@
 
 # dotenv
 /.env
+
+# gem
+/Gemfile
