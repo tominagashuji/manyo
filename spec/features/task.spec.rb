@@ -2,7 +2,7 @@
 
 require 'rails_helper'
 
-#このRSぺc。reatureの右側にテスト項目の名称を書きます(do~end でグループ化されてる)
+#このRSpec。featureの右側にテスト項目の名称を書きます(do~end でグループ化されてる)
 RSpec.feature "1.タスク管理機能",type: :feature do
   #scenario(itのalias)の中に、確認したい各項目のテストの処理を書きます。
   background do
