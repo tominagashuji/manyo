@@ -33,6 +33,9 @@ group :development, :test do
 
   # step15追加
   gem 'enum_help'
+
+  # step17追加
+  gem 'kaminari', '~> 0.17.0'
 end
 
 group :development do

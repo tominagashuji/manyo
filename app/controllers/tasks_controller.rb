@@ -1,5 +1,6 @@
 class TasksController < ApplicationController
   before_action :set_task, only: %i(show edit update destroy)
+  PRE = 5
 
   def index
     if params[:sort_expired]
@@ -9,6 +10,7 @@ class TasksController < ApplicationController
     else
       @tasks = Task.all.order(created_at: "DESC")
     end
+    @tasks = @tasks.page(params[:page]).per(PRE)
   end
 
   def new

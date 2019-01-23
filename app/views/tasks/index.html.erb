@@ -30,6 +30,7 @@
     <td><%= link_to t('index.delete'), task_path(task.id), method: :delete ,data: {confirm: "削除確認"} %></td>
   </tr>
 <% end %>
+<%= paginate @tasks %>
 </table>
 
 <p><%= link_to t('index.new'), new_task_path %></p>
