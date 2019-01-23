@@ -2,6 +2,7 @@
   "name": "manyo",
   "private": true,
   "dependencies": {
+    "bootstrap": "3",
     "jquery": "^3.3.1"
   }
 }
