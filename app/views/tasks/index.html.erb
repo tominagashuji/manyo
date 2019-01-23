@@ -31,6 +31,7 @@
   </tr>
 <% end %>
 </table>
+<%= paginate @tasks %>
 
 <p><%= link_to t('index.new'), new_task_path %></p>
 <p><%= link_to t('index.limit_on_sort'), tasks_path(sort_expired: "true") %></p>

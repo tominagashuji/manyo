@@ -1,13 +1,20 @@
 class TasksController < ApplicationController
-  before_action :set_task, only:[:show,:edit,:update,:destroy]
+  before_action :set_task, only: %i(show edit update destroy)
+  PER = 5
 
   def index
     if params[:sort_expired]
-      @tasks = Task.all.order(limit_on: "DESC")
+      # @tasks = Task.all.order(limit_on: "DESC")
+      # @tasks = Task.page(params[:page]).per(PER).limit_on_sorted
+      @tasks = Task.page(params[:page]).per(PER).limit_on_sorted
     elsif params[:sort_priority]
-      @tasks = Task.all.order(priority: "DESC")
-    else
-      @tasks = Task.all.order(created_at: "DESC")
+      # @tasks = Task.all.order(priority: "DESC")
+      # @tasks = Task.page(params[:page]).per(PER).priority_sorted
+      @tasks = Task.page(params[:page]).per(PER).priority_sorted
+    elsif
+      # @tasks = Task.all.order(created_at: "DESC")
+      # @tasks = Task.page(params[:page]).per(PER).created_at_sorted
+      @tasks = Task.page(params[:page]).per(PER).created_at_sorted
     end
   end
 
@@ -41,13 +48,13 @@ class TasksController < ApplicationController
 
   def search
     if params[:task][:name].present? && params[:task][:status].present?
-      @tasks = Task.name_status_search(params[:task][:name],params[:task][:status])
+      @tasks = Task.name_status_search(params[:task][:name],params[:task][:status]).page(params[:page]).per(PER)
       render "index"
     elsif params[:task][:name].present?
-      @tasks = Task.name_search(params[:task][:name])
+      @tasks = Task.name_search(params[:task][:name]).page(params[:page]).per(PER)
       render "index"
     elsif params[:task][:status].present?
-      @tasks = Task.status_search(params[:task][:status])
+      @tasks = Task.status_search(params[:task][:status]).page(params[:page]).per(PER)
       render "index"
     elsif params[:task][:name].blank? && params[:task][:status].blank?
       redirect_to tasks_path, notice: t("flash.blank")
