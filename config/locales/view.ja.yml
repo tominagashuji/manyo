@@ -22,3 +22,8 @@ ja:
         low: 低
         medium: 中
         high: 高
+  pagination:
+    next: 次へ
+    last: 最後へ
+    first: 最初へ
+    previous: 前へ

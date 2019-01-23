@@ -100,6 +100,7 @@ RSpec.feature "3.検索機能テスト",type: :feature do
     visit tasks_path
     fill_in 'task_name', with: 'search_name01'
     click_on '検索する'
+
     expect(page).to have_content 'search_name01'
     expect(page).to have_content '2000-01-01'
     expect(page).to have_content '未着手'
@@ -128,7 +129,6 @@ RSpec.feature "3.検索機能テスト",type: :feature do
     expect(page).to have_content 'search_name02'
     expect(page).to have_content '2000-01-02'
     expect(page).to have_content '着手中'
-    save_and_open_page
   end
 end
 
@@ -160,7 +160,8 @@ RSpec.feature "5.ページネーションテスト",type: :feature do
 
   scenario "ページネーション動作確認" do
     visit tasks_path
-    click_on 'next page'
-    expect(page).to have_content 'pagenation_name_06'
+    click_on 'Next'
+    save_and_open_page
+    expect(page).to have_content 'pagenation_name_01'
   end
 end

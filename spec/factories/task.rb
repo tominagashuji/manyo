@@ -65,26 +65,32 @@ FactoryBot.define do
   factory :pagenation_01, class: Task do
     name {'pagenation_name_01'}
     content {'pagenation_content_01'}
+    limit_on { '20000101' }
   end
   factory :pagenation_02, class: Task do
     name {'pagenation_name_02'}
     content {'pagenation_content_02'}
+    limit_on { '20000102' }
   end
   factory :pagenation_03, class: Task do
     name {'pagenation_name_03'}
     content {'pagenation_content_03'}
+    limit_on { '20000103' }
   end
   factory :pagenation_04, class: Task do
     name {'pagenation_name_04'}
     content {'pagenation_content_04'}
+    limit_on { '20000104' }
   end
   factory :pagenation_05, class: Task do
     name {'pagenation_name_05'}
     content {'pagenation_content_05'}
+    limit_on { '20000105' }
   end
   factory :pagenation_06, class: Task do
     name {'pagenation_name_06'}
     content {'pagenation_content_06'}
+    limit_on { '20000106' }
   end
 
 end
