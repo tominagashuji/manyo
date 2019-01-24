@@ -7,8 +7,6 @@ RSpec.describe Task, type: :model do
     expect(task).not_to be_valid
   end
 
-
-
   it "contentが空ならバリデーションが通らない" do
     task = Task.new(name: '失敗テスト', content: '')
     expect(task).not_to be_valid
