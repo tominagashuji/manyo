@@ -18,7 +18,7 @@
       </tr>
 
     <% @tasks.each do |task| %>
-      <tr>
+      <tr class="danger">
         <td><%= task.name %></td>
         <td><%= task.content %></td>
         <td><%= task.limit_on %></td>
@@ -35,10 +35,11 @@
 
   <div class="container">
     <div class="row">
-      <%= link_to t('index.new'), new_task_path, class: 'col-md-3 col-sm-3 col-xs-12' %>
-      <%= link_to t('index.limit_on_sort'), tasks_path(sort_expired: "true"), class: 'col-md-3 col-sm-3 col-xs-12' %>
-      <%= link_to t('index.priority_sort'), tasks_path(sort_priority: "true"), class: 'col-md-3 col-sm-3 col-xs-12' %>
-      <%= link_to t('index.index'), tasks_path, class: 'col-md-3 col-sm-3 col-xs-12' %>
+      <%= link_to t('index.new'), new_task_path, class: 'btn btn-success col-md-3 col-sm-3 col-xs-12' %>
+      <%#= link_to t('index.new'), new_task_path, class: 'btn btn-outline-secondary col-md-3 col-sm-3 col-xs-12' %>
+      <%= link_to t('index.limit_on_sort'), tasks_path(sort_expired: "true"), class: 'btn btn-success col-md-3 col-sm-3 col-xs-12' %>
+      <%= link_to t('index.priority_sort'), tasks_path(sort_priority: "true"), class: 'btn btn-success col-md-3 col-sm-3 col-xs-12' %>
+      <%= link_to t('index.index'), tasks_path, class: 'btn btn-success col-md-3 col-sm-3 col-xs-12' %>
     </div>
   </div>
 
