@@ -4,6 +4,7 @@
     <title>Manyo</title>
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
+    <meta name="viewport" content="width=device-width">
 
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
@@ -11,10 +12,26 @@
 
   <body>
     <header>
-      <ul>
-        <li><a href="#">Bootstrap導入</a></li>
-        <li><a href="#">トップページ</a></li>
-      </ul>
+      <nav class="navbar navbar-default">
+        <div class="container-fluid">
+          <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#gnavi">
+              <span class="sr-only">Bootstrap</span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="#">タスク管理システム</a>
+          </div>
+          <div id="gnavi" class="collapse navbar-collapse">
+            <ul class="nav navbar-nav">
+              <li><a href="">top</a></li>
+              <li><a href="">menu1</a></li>
+              <li><a href="">menu2</a></li>
+            </ul>
+          </div>
+        </div>
+      </nav>
     </header>
     <%= yield %>
     <footer>

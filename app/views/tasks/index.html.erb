@@ -1,41 +1,43 @@
-<h1>タスク一覧</h1>
+  <h1>タスク一覧</h1>
 
-<%= form_with(model: Task.new, url: search_tasks_path, method: :get, local: true) do |f| %>
-  <%= f.label :name_search, t("index.name_search") %>
-  <%= f.text_field :name %>
-  <%= f.label :status_search, t("index.status_search") %>
-  <%= f.select :status, Task.statuses_i18n.invert, include_blank: true, selected: "" %>
-  <%= f.submit t('index.search') %>
-<% end %>
+  <%= form_with(model: Task.new, url: search_tasks_path, method: :get, local: true) do |f| %>
+    <%= f.label :name_search, t("index.name_search") %>
+    <%= f.text_field :name %>
+    <%= f.label :status_search, t("index.status_search") %>
+    <%= f.select :status, Task.statuses_i18n.invert, include_blank: true, selected: "" %>
+    <%= f.submit t('index.search') %>
+  <% end %>
 
-<table>
-  <tr>
-    <th>名前</th>
-    <th>内容</th>
-    <th>終了期限</th>
-    <th>ステータス</th>
-    <th>優先度</th>
-  </tr>
+  <div class="container">
+    <% @tasks.each do |task| %>
+    <ul class="row">
+      <li class="col-md-2 col-sm-2 col-xs-2">名前</li>
+      <li class="col-md-10 col-sm-10 col-xs-10"><%= task.name %></li>
 
-<% @tasks.each do |task| %>
-  <tr>
-    <td><%= task.name %></td>
-    <td><%= task.content %></td>
-    <td><%= task.limit_on %></td>
-    <td><%= task.status_i18n %></td>
-    <td><%= task.priority_i18n %></td>
+      <li class="col-md-2 col-sm-2 col-xs-2">内容</li>
+      <li class="col-md-10 col-sm-10 col-xs-10"><%= task.content %></li>
 
-    <td><%= link_to t('index.show'), task_path(task.id) %></td>
-    <td><%= link_to t('index.edit'), edit_task_path(task.id), data: {confirm: '編集確認'} %></td>
-    <td><%= link_to t('index.delete'), task_path(task.id), method: :delete ,data: {confirm: "削除確認"} %></td>
-  </tr>
-<% end %>
-</table>
-<%= paginate @tasks %>
+      <li class="col-md-2 col-sm-2 col-xs-2">終了期限</li>
+      <li class="col-md-10 col-sm-10 col-xs-10"><%= task.limit_on %></li>
 
-<p><%= link_to t('index.new'), new_task_path %></p>
-<p><%= link_to t('index.limit_on_sort'), tasks_path(sort_expired: "true") %></p>
-<p><%= link_to t('index.priority_sort'), tasks_path(sort_priority: "true") %></p>
-<p><%= link_to t('index.index'), tasks_path %></p>
+      <li class="col-md-2 col-sm-2 col-xs-2">ステータス</li>
+      <li class="col-md-10 col-sm-10 col-xs-10"><%= task.status_i18n %></li>
 
-<%= t('view.sample') %>
+      <li class="col-md-2 col-sm-2 col-xs-2">優先度</li>
+      <li class="col-md-10 col-sm-10 col-xs-10"><%= task.priority_i18n %></li>
+
+      <li><%= link_to t('index.show'), task_path(task.id), class: 'btn btn-primary col-md-4 col-sm-4 col-xs-4' %></li>
+      <li><%= link_to t('index.edit'), edit_task_path(task.id),data: {confirm: '編集確認'} , class: 'btn btn-warning col-md-4 col-sm-4 col-xs-4' %></li>
+      <li><%= link_to t('index.delete'), task_path(task.id), method: :delete ,data: {confirm: "削除確認"} , class: 'btn btn-danger col-md-4 col-sm-4 col-xs-4' %></li>
+    </ul>
+    <br>
+    <% end %>
+  </div>
+  <%= paginate @tasks %>
+
+  <p><%= link_to t('index.new'), new_task_path %></p>
+  <p><%= link_to t('index.limit_on_sort'), tasks_path(sort_expired: "true") %></p>
+  <p><%= link_to t('index.priority_sort'), tasks_path(sort_priority: "true") %></p>
+  <p><%= link_to t('index.index'), tasks_path %></p>
+
+  <%= t('view.sample') %>
