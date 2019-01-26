@@ -26,4 +26,7 @@ class Task < ApplicationRecord
   # priority から一致するものを探す
   scope :priority_search, -> priority{where(priority: priority)}
 
+  # アソシエーション
+  belongs_to :user
+  
 end
