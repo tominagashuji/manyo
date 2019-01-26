@@ -36,6 +36,10 @@ group :development, :test do
 
   # step17追加
   gem 'kaminari', '~> 0.17.0'
+
+  # step19追加
+  gem 'bcrypt', '~> 3.1.7'
+
 end
 
 group :development do

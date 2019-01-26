@@ -31,3 +31,6 @@
 
 # gem
 /Gemfile
+
+# gemのコミットが反映されないようにする
+/vendor/bundle
