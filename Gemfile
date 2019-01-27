@@ -39,6 +39,7 @@ group :development, :test do
 
   # step19追加
   gem 'bcrypt', '~> 3.1.7'
+  gem 'faker'
 
 end
 
