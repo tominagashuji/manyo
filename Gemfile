@@ -41,6 +41,9 @@ group :development, :test do
   gem 'bcrypt', '~> 3.1.7'
   gem 'faker'
 
+  # step20追加
+  gem 'jquery-rails'
+  gem 'jquery-ui-rails'
 end
 
 group :development do
