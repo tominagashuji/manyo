@@ -22,7 +22,7 @@ class UsersController < ApplicationController
   def show
     @user = User.find(params[:id])
     if current_user.id != @user.id
-      redirect_to user_path(current_user.id),nottice: '他のユーザーです'
+      redirect_to user_path(current_user.id),notice: '他のユーザーです'
     end
   end
 
