@@ -6,15 +6,18 @@ class TasksController < ApplicationController
     if params[:sort_expired]
       # @tasks = Task.all.order(limit_on: "DESC")
       # @tasks = Task.page(params[:page]).per(PER).limit_on_sorted
-      @tasks = Task.page(params[:page]).per(PER).limit_on_sorted
+      # @tasks = Task.page(params[:page]).per(PER).limit_on_sorted
+      @tasks = current_user.tasks.page(params[:page]).per(PER).limit_on_sorted
     elsif params[:sort_priority]
       # @tasks = Task.all.order(priority: "DESC")
       # @tasks = Task.page(params[:page]).per(PER).priority_sorted
-      @tasks = Task.page(params[:page]).per(PER).priority_sorted
+      # @tasks = Task.page(params[:page]).per(PER).priority_sorted
+      @tasks = current_user.tasks.page(params[:page]).per(PER).priority_sorted
     elsif
       # @tasks = Task.all.order(created_at: "DESC")
       # @tasks = Task.page(params[:page]).per(PER).created_at_sorted
-      @tasks = Task.page(params[:page]).per(PER).created_at_sorted
+      # @tasks = Task.page(params[:page]).per(PER).created_at_sorted
+      @tasks = current_user.tasks.page(params[:page]).per(PER).created_at_sorted
     end
   end
 
@@ -23,8 +26,15 @@ class TasksController < ApplicationController
   end
 
   def create
-    Task.create(task_params)
-    redirect_to new_task_path
+    @task = current_user.tasks.new(task_params)
+
+    if @task.save
+      redirect_to @task, notice: "タスク「#{@task.name}」を登録しました。"
+    else
+      render :new
+    end
+    # Task.create(task_params)
+    # redirect_to new_task_path
   end
 
   def show
@@ -64,10 +74,11 @@ class TasksController < ApplicationController
   private
 
   def task_params
-    params.require(:task).permit(:name,:content,:limit_on,:status,:priority)
+    params.require(:task).permit(:name,:content,:limit_on,:status,:priority,:user_id)
   end
 
   def set_task
-    @task = Task.find(params[:id])
+    # @task = Task.find(params[:id])
+    @task = current_user.tasks.find(params[:id])
   end
 end
