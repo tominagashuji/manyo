@@ -36,6 +36,14 @@ group :development, :test do
 
   # step17追加
   gem 'kaminari', '~> 0.17.0'
+
+  # step19追加
+  gem 'bcrypt', '~> 3.1.7'
+  gem 'faker'
+
+  # step20追加
+  gem 'jquery-rails'
+  gem 'jquery-ui-rails'
 end
 
 group :development do

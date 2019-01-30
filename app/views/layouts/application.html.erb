@@ -27,14 +27,20 @@
             </div>
             <div id="gnavi" class="collapse navbar-collapse">
               <ul class="nav navbar-nav">
-                <li><a href="">top</a></li>
-                <li><a href="">menu1</a></li>
-                <li><a href="">menu2</a></li>
+                <% if current_user %>
+                  <li><%= link_to t('header.index'),tasks_path %></li>
+                  <!-- <li><%= link_to t('index.logout'),logout_path, method: :delete %></li> -->
+                  <li><%= link_to t('header.logout'),logout_path %></li>
+                  <li><%= link_to t('header.show'),user_path(current_user.id) %></li>
+                <% else %>
+                  <li><%= link_to t('header.new'),new_user_path %></li>
+                  <li><%= link_to t('header.login'),login_path %></li>
+                <% end %>
               </ul>
             </div>
           </div>
         </nav>
-      </header>
+      </header><br>
       <%= yield %>
       </div>
     </div>

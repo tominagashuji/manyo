@@ -7,6 +7,12 @@ FactoryBot.define do
     content { 'samplesample1' }
   end
 
+  factory :task01, class: Task do
+    name { 'task01' }
+    content { 'content01' }
+    status { 'nowork' }
+  end
+
   # 作成するテストデータの名前を「second_task」とします
   # （存在しないクラス名の名前をつける場合、オプションで「このクラスのテストデータにする」と指定する
   factory :second_task, class: Task do
