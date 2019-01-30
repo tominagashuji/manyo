@@ -27,3 +27,18 @@ ja:
     last: 最後へ
     first: 最初へ
     previous: 前へ
+  header:
+    new: 新規ユーザー登録
+    login: ログイン
+    index: 一覧
+    show: ユーザー詳細
+    logout: ログアウト
+  user:
+    name: 名前
+    email: email
+    password: パスワード
+    password confirmation: パスワード確認
+    new: 登録する
+  session:
+    new: ログインする
+    Log in: ログインする
