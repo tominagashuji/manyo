@@ -2,6 +2,11 @@ Rails.application.routes.draw do
   #setp
   root 'tasks#index'
 
+  #setp 21
+  namespace :admin do
+    resources :users
+  end
+
   #setp20
   get '/login', to: 'sessions#new'
   post '/login', to: 'sessions#create'

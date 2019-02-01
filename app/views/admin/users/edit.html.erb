@@ -1,0 +1,30 @@
+<%= form_with(model: [:admin, @user], local: admin_users_path) do |f| %>
+  <div class="user_name">
+    <%= f.label :name %>
+    <%= f.text_field :name %>
+  </div>
+
+  <div class="user_email">
+    <%= f.label :email %>
+    <%= f.email_field :email %>
+  </div>
+
+  <div class="user_password">
+    <%= f.label :password %>
+    <%= f.password_field :password %>
+  </div>
+
+  <div class="user_password_confirmation">
+    <%= f.label :password_confirmation %>
+    <%= f.password_field :password_confirmation %>
+  </div>
+
+  <div class="user_admin">
+    <%= f.label :admin %>
+    <%= f.check_box :admin %>
+  </div>
+
+  <%= f.submit %>
+<% end %>
+
+<%= link_to '管理画面一覧に戻る', admin_users_path %>
