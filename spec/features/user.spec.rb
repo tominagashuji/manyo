@@ -24,6 +24,7 @@ RSpec.feature "1.ユーザー登録機能",type: :feature do
     # binding.pry
     # save_and_open_page
     visit user_path(User.first)
+
     expect(page).to have_content 'aaa'
     expect(page).to have_content 'aaa@gmail.com'
   end
