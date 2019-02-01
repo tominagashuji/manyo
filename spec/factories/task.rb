@@ -5,6 +5,9 @@ FactoryBot.define do
   factory :task, class: Task do
     name { 'testtesttest1' }
     content { 'samplesample1' }
+    limit_on { '20010101' }
+    status { 'nowork' }
+    priority { 'low' }
   end
 
   factory :task01, class: Task do

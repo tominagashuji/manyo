@@ -20,10 +20,10 @@ RSpec.feature "1.ユーザー登録機能",type: :feature do
     visit login_path
     fill_in 'session_email', with: 'aaa@gmail.com'
     fill_in 'session_password', with: 'aaaaaa'
-    click_button 'Log in'
-    # binding.pry
-    # save_and_open_page
+    save_and_open_page
+    click_button 'Login'
     visit user_path(User.first)
+
     expect(page).to have_content 'aaa'
     expect(page).to have_content 'aaa@gmail.com'
   end
