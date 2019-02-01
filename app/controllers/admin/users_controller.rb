@@ -1,6 +1,6 @@
 class Admin::UsersController < ApplicationController
   def index
-    @users =User.all
+    @users =User.select(:id, :name, :email, :created_at, :updated_at, :admin).includes(:tasks)
   end
 
   def new
@@ -23,6 +23,7 @@ class Admin::UsersController < ApplicationController
 
   def show
     @user = User.find(params[:id])
+    @tasks = @user.tasks
   end
 
   def update
