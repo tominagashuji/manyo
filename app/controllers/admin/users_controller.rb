@@ -11,7 +11,7 @@ class Admin::UsersController < ApplicationController
     @user = User.new(user_params)
 
     if @user.save
-      redirect_to admin_user_path(@user.id), notice: "ユーザー「#{@user.name}」を登録しました"
+      redirect_to admin_users_path(@user.id), notice: "ユーザー「#{@user.name}」を登録しました"
     else
       render :new
     end
@@ -29,7 +29,7 @@ class Admin::UsersController < ApplicationController
   def update
     @user = User.find(params[:id])
     if @user.update(user_params)
-      redirect_to admin_user_path(@user),notice: "ユーザー「{#@user.neme}」を更新しました！"
+      redirect_to admin_users_path,notice: "ユーザーを更新しました！"
     else
       render :new
     end

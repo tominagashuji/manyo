@@ -4,6 +4,7 @@ describe 'タスク管理機能', type: :feature do
   describe '一覧表示機能' do
     let(:user_a) { FactoryBot.create(:user, name: 'ユーザーA',email: 'a@example.com')}
     let(:user_b) { FactoryBot.create(:user, name: 'ユーザーB',email: 'b@example.com')}
+    let(:user_c) { FactoryBot.create(:user, name: 'ユーザーC',email: 'c@example.com',admin: true)}
     let!(:task_a) { FactoryBot.create(:task,name: '最初のタスク',user: user_a)}
 
     before do
@@ -133,9 +134,58 @@ describe 'タスク管理機能', type: :feature do
           click_on 'Next'
           expect(page).to have_content 'name02'
           expect(page).to have_content 'name01'
-          save_and_open_page
         end
+      end
 
+      describe '管理者ユーザーテスト' do
+        context 'ユーザーCがログインしている時' do
+          let(:login_user){user_c}
+
+          before do
+            task01 = FactoryBot.create(:task, name: 'name01', created_at: '2001-01-01', limit_on: '2001-02-01', status: 0, priority: 0, user: user_c)
+            task02 = FactoryBot.create(:task, name: 'name02', created_at: '2001-01-01', limit_on: '2001-02-01', status: 0, priority: 0, user: user_c)
+            # user01 = FactoryBot.create(:user)
+            visit admin_users_path
+          end
+
+          it '管理者ユーザー作成テスト' do
+            visit new_admin_user_path
+            fill_in 'user_name', with: 'ddd'
+            fill_in 'user_email', with: 'd@example.com'
+            fill_in 'user_password', with: 'aaaaaa'
+            fill_in 'user_password_confirmation', with: 'aaaaaa'
+            check 'user_admin'
+            click_on '登録する'
+            expect(page).to have_content'「ddd」を登録しました'
+          end
+
+          it 'ユーザー一覧表示' do
+            expect(page).to have_content 'ユーザーC'
+          end
+
+          # it 'ユーザー詳細表示' do
+          #   save_and_open_page
+          #   click_on '詳細', match: :first
+          #   save_and_open_page
+          #   expect(page).to have_content 'name01'
+          # end
+
+          it 'ユーザー削除テスト' do
+            click_on '削除', match: :first
+            expect(page).to have_content '「ユーザーA」を削除しました！'
+          end
+
+          it 'ユーザー編集テスト' do
+            click_on '編集', match: :first
+            fill_in 'user_name', with: 'ユーザーAA'
+            fill_in 'user_password', with: 'bbbbbb'
+            fill_in 'user_password_confirmation', with: 'bbbbbb'
+            check 'user_admin'
+            click_on '更新する'
+            expect(page).to have_content 'ユーザーAA'
+          end
+
+        end
       end
     end
   end
