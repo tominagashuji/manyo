@@ -5,6 +5,7 @@ Rails.application.routes.draw do
   #setp 21
   namespace :admin do
     resources :users
+    get :error
   end
 
   #setp20
