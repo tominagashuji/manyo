@@ -11,6 +11,22 @@
     <%= form.label :limit_on %>
     <%= form.text_field :limit_on %>
   </div>
+  <div class="task_status">
+    <%= form.label :status %>
+    <%= form.select :status, Task.statuses_i18n.invert %>
+  </div>
+  <div class="task_priority">
+    <%= form.label :priority %>
+    <%= form.select :priority, Task.priorities_i18n.invert %>
+  </div>
+  <div class="task_label">
+    <% @labels.each do |label| %>
+      <%= form.check_box :label_ids, { multiple: true, checked: label[:checked],
+                                                      disabled: label[:disabled], include_hidden: false }, label[:id] %>
+      <label style="background-color: yellow"><%= label.name %></label>
+    <% end %>
+  </div>
+  
   <%= form.submit %>
 <% end %>
 

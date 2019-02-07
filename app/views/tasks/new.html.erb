@@ -21,6 +21,14 @@
     <%= form.select :priority, Task.priorities_i18n.invert %>
   </div>
 
+  <div class="task_label">
+    <% @labels.each do |label| %>
+      <%= form.check_box :label_ids, { multiple: true, checked: label[:checked],
+                                                      disabled: label[:disabled], include_hidden: false }, label[:id] %>
+      <label style="background-color: yellow"><%= label.name %></label>
+    <% end %>
+  </div>
+
   <%= form.submit %>
 <% end %>
 
