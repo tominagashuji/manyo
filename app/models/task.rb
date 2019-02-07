@@ -28,5 +28,10 @@ class Task < ApplicationRecord
 
   # アソシエーション
   belongs_to :user
-  
+  #step24 ラベル対応
+  has_many :labelings
+  has_many :labels, through: :labelings, source: :label, inverse_of: :tasks
+
+  #親から子を作成する時に必要な設定（親：tasks,子：labels）
+  accepts_nested_attributes_for :labels
 end

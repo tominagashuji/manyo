@@ -23,6 +23,8 @@ class TasksController < ApplicationController
 
   def new
     @task = Task.new
+    @labels = Label.all
+    @task.labels.build
   end
 
   def create
@@ -42,6 +44,7 @@ class TasksController < ApplicationController
   end
 
   def edit
+    @labels = @task.labels
   end
 
   def update
@@ -75,7 +78,16 @@ class TasksController < ApplicationController
   private
 
   def task_params
-    params.require(:task).permit(:name,:content,:limit_on,:status,:priority,:user_id)
+    params.require(:task).permit(
+      :name,
+      :content,
+      :limit_on,
+      :status,
+      :priority,
+      :user_id,
+      label_ids:[],
+      labels_attributes: %i(id name)
+      )
   end
 
   def set_task
