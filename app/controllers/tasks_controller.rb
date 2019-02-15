@@ -1,5 +1,6 @@
 class TasksController < ApplicationController
   before_action :set_task, only: %i(show edit update destroy)
+  before_action :set_labels, only: %i(index new edit search)
   PER = 5
 
   def index
@@ -23,7 +24,6 @@ class TasksController < ApplicationController
 
   def new
     @task = Task.new
-    @labels = Label.all
     @task.labels.build
   end
 
@@ -40,11 +40,9 @@ class TasksController < ApplicationController
   end
 
   def show
-
   end
 
   def edit
-    @labels = @task.labels
   end
 
   def update
@@ -61,18 +59,33 @@ class TasksController < ApplicationController
   end
 
   def search
-    if params[:task][:name].present? && params[:task][:status].present?
-      @tasks = Task.name_status_search(params[:task][:name],params[:task][:status]).page(params[:page]).per(PER)
-      render "index"
-    elsif params[:task][:name].present?
-      @tasks = Task.name_search(params[:task][:name]).page(params[:page]).per(PER)
-      render "index"
-    elsif params[:task][:status].present?
-      @tasks = Task.status_search(params[:task][:status]).page(params[:page]).per(PER)
-      render "index"
-    elsif params[:task][:name].blank? && params[:task][:status].blank?
-      redirect_to tasks_path, notice: t("flash.blank")
+    # if params[:task][:name].present? && params[:task][:status].present?
+    #   @tasks = Task.name_status_search(params[:task][:name],params[:task][:status]).page(params[:page]).per(PER)
+    #   render "index"
+    # elsif params[:task][:name].present?
+    #   @tasks = Task.name_search(params[:task][:name]).page(params[:page]).per(PER)
+    #   render "index"
+    # elsif params[:task][:status].present?
+    #   @tasks = Task.status_search(params[:task][:status]).page(params[:page]).per(PER)
+    #   render "index"
+    # elsif params[:task][:name].blank? && params[:task][:status].blank?
+    #   redirect_to tasks_path, notice: t("flash.blank")
+    # end
+
+    @tasks = Task.all
+    if params[:task][:name].present?
+      @tasks = @tasks.name_search(params[:task][:name])
     end
+    if params[:task][:status].present?
+      @tasks = @tasks.status_search(params[:task][:status])
+    end
+    if params[:task][:label].present?
+      @tasks = @tasks.label_search(params[:task][:label])
+    end
+    # binding.pry
+
+    @tasks = @tasks.page(params[:page]).per(PER)
+    render "index"
   end
 
   private
@@ -94,4 +107,9 @@ class TasksController < ApplicationController
     # @task = Task.find(params[:id])
     @task = current_user.tasks.find(params[:id])
   end
+
+  def set_labels
+    @labels = Label.all
+  end
+
 end

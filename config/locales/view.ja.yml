@@ -12,6 +12,7 @@ ja:
     name_search: 名前検索
     status_search: ステータス検索
     priority_sort: 優先度でソートする
+    label: ラベル検索
   enums:
     task:
       status:

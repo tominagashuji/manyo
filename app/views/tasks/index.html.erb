@@ -6,7 +6,19 @@
   <%= f.text_field :name %>
   <%= f.label :status_search, t("index.status_search") %>
   <%= f.select :status, Task.statuses_i18n.invert, include_blank: true, selected: "" %>
-  <%= f.submit t('index.search') %>
+
+  <div>
+    <%= f.label :label_search, t("index.label") %>
+    <% @labels.each do |label| %>
+      <%= f.radio_button :label_search, label.id %>
+      <%= label.name %>
+    <% end %>
+    <%= f.submit t('index.search') %>
+  </div>
+
+  <%#= f.label :label_search, t("index.label") %>
+  <%#= f.text_field :label %>
+  <%#= f.submit t('index.search') %>
 <% end %>
 
   <table class="table table-striped table-responsive table-condensed table-hover">
