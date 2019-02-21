@@ -4,21 +4,25 @@ class TasksController < ApplicationController
   PER = 5
 
   def index
+    @tasks = current_user.tasks.page(params[:page]).per(PER)
     if params[:sort_expired]
       # @tasks = Task.all.order(limit_on: "DESC")
       # @tasks = Task.page(params[:page]).per(PER).limit_on_sorted
       # @tasks = Task.page(params[:page]).per(PER).limit_on_sorted
-      @tasks = current_user.tasks.page(params[:page]).per(PER).limit_on_sorted
+      # @tasks = @tasks.current_user.tasks.page(params[:page]).per(PER).limit_on_sorted
+      @tasks = @tasks.limit_on_sorted
     elsif params[:sort_priority]
       # @tasks = Task.all.order(priority: "DESC")
       # @tasks = Task.page(params[:page]).per(PER).priority_sorted
       # @tasks = Task.page(params[:page]).per(PER).priority_sorted
-      @tasks = current_user.tasks.page(params[:page]).per(PER).priority_sorted
+      # @tasks = current_user.tasks.page(params[:page]).per(PER).priority_sorted
+      @tasks = @tasks.priority_sorted
     elsif
       # @tasks = Task.all.order(created_at: "DESC")
       # @tasks = Task.page(params[:page]).per(PER).created_at_sorted
       # @tasks = Task.page(params[:page]).per(PER).created_at_sorted
-      @tasks = current_user.tasks.page(params[:page]).per(PER).created_at_sorted
+      # @tasks = current_user.tasks.page(params[:page]).per(PER).created_at_sorted
+      @tasks = @tasks.created_at_sorted
     end
   end
 
