@@ -28,10 +28,10 @@ class Task < ApplicationRecord
   # status label から一致する条件を返す
   scope :status_current_user_search, -> (status, current_user_id) { where(status: status).where(user_id: current_user_id) }
   # label から一致する条件を返す
-  scope :label_search, ->(label) do
-    task_ids = Labeling.where(label_id: label).pluck(:task_id)
-    where(id: task_ids) if label
-  end
+  # scope :label_search, ->(label) do
+  #   task_ids = Labeling.where(label_id: label).pluck(:task_id)
+  #   where(id: task_ids) if label
+  # end
 
   scope :order_by_expired_at, ->(sort) { all.order(expired_at: :desc) if sort }
   scope :order_by_priority, ->(sort) { all.order(priority: :desc) if sort }

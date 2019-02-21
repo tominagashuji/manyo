@@ -13,14 +13,14 @@
 )
 end
 
-#Userを作成（権限有り）
-# User.create!(
-#   name: "admin",
-#   email: "admin@gmail.com",
-#   password_digest: "password",
-#   admin: true,
-#   password: "aaaaaa",
-#   )
+# Userを作成（権限有り）
+User.create!(
+  name: "admin",
+  email: "admin@gmail.com",
+  password_digest: "password",
+  admin: true,
+  password: "aaaaaa",
+  )
 
 #Userが作成したとするtaskを作成
 users = User.all

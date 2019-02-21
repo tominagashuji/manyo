@@ -72,7 +72,9 @@ class TasksController < ApplicationController
     #   redirect_to tasks_path, notice: t("flash.blank")
     # end
 
-    @tasks = Task.all
+
+    # @tasks = Task.all
+    @tasks = current_user.tasks
     if params[:task][:name].present?
       @tasks = @tasks.name_search(params[:task][:name])
     end
@@ -80,9 +82,14 @@ class TasksController < ApplicationController
       @tasks = @tasks.status_search(params[:task][:status])
     end
     if params[:task][:label].present?
-      @tasks = @tasks.label_search(params[:task][:label])
+      # @tasks = @tasks.label_search(params[:task][:label])
+      # task_ids = Labeling.where(label_id: params[:task][:label]).pluck(:task_id)
+      task_ids = Labeling.where(label_id: params[:task][:label])
+      task_ids = task_ids.pluck(:task_id)
+      if params[:task][:label]
+        @tasks = @tasks.where(id: task_ids)
+      end
     end
-    # binding.pry
 
     @tasks = @tasks.page(params[:page]).per(PER)
     render "index"
