@@ -19,7 +19,7 @@ class Task < ApplicationRecord
   # statusから一致する条件を返す
   scope :status_search, -> status {where(status: status)}
   # name と statusから一致する条件を返す
-  scope :name_status_search, -> (name, status) { where("name like ?", "%#{name}%").where(status: status)}
+  # scope :name_status_search, -> (name, status) { where("name like ?", "%#{name}%").where(status: status)}
 
   # name status label から一致する条件を返す
   scope :name_status_current_user_search, -> (name, status, current_user_id) { where("name LIKE ?", "%#{ name }%").where(status: status).where(user_id: current_user_id) }
@@ -35,7 +35,6 @@ class Task < ApplicationRecord
 
   scope :order_by_expired_at, ->(sort) { all.order(expired_at: :desc) if sort }
   scope :order_by_priority, ->(sort) { all.order(priority: :desc) if sort }
-
 
   # ステップ16対応 優先順位
   enum priority: { low: 0, medium: 1, high: 2,}
