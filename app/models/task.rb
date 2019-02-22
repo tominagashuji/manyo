@@ -8,6 +8,13 @@ class Task < ApplicationRecord
     work: 1,   # 着手
     comp: 2,  # 完了
   }
+  # ステップ16対応 優先順位
+  enum priority: {
+    low: 0,
+    medium: 1,
+    high: 2,
+  }
+
   # scope
   #
   scope :limit_on_sorted, -> { order(limit_on: :desc) }#limit_onカラムを降順
@@ -18,26 +25,18 @@ class Task < ApplicationRecord
   scope :name_search , -> name {where('name like ?', "%#{name}%")}
   # statusから一致する条件を返す
   scope :status_search, -> status {where(status: status)}
-  # name と statusから一致する条件を返す
-  # scope :name_status_search, -> (name, status) { where("name like ?", "%#{name}%").where(status: status)}
-
-  # name status label から一致する条件を返す
-  scope :name_status_current_user_search, -> (name, status, current_user_id) { where("name LIKE ?", "%#{ name }%").where(status: status).where(user_id: current_user_id) }
-  # name label から一致する条件を返す
-  scope :name_current_user_search, -> (name, current_user_id) { where("name LIKE ?", "%#{ name }%").where(user_id: current_user_id) }
-  # status label から一致する条件を返す
-  scope :status_current_user_search, -> (status, current_user_id) { where(status: status).where(user_id: current_user_id) }
   # label から一致する条件を返す
   # scope :label_search, ->(label) do
   #   task_ids = Labeling.where(label_id: label).pluck(:task_id)
   #   where(id: task_ids) if label
   # end
 
+  # name と statusから一致する条件を返す＞処理のロジックを変更して不要となった。
+  # scope :name_status_search, -> (name, status) { where("name like ?", "%#{name}%").where(status: status)}
+
   scope :order_by_expired_at, ->(sort) { all.order(expired_at: :desc) if sort }
   scope :order_by_priority, ->(sort) { all.order(priority: :desc) if sort }
 
-  # ステップ16対応 優先順位
-  enum priority: { low: 0, medium: 1, high: 2,}
   # priority から一致するものを探す
   scope :priority_search, -> priority{where(priority: priority)}
 
