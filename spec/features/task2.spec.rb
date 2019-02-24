@@ -123,6 +123,13 @@ describe 'タスク管理機能', type: :feature do
           expect(page).to have_content 'name03'
         end
 
+        it 'ラベル検索テスト' do
+          # save_and_open_page
+          # check 'task_label_1'
+          # click_on '検索する'
+          # expect(page).to have_content 'name01'
+        end
+
         it '優先度ソートテスト' do
           click_on '優先度でソートする'
           expect(page).to have_content '高'

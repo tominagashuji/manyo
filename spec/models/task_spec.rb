@@ -4,7 +4,6 @@ RSpec.describe Task, type: :model do
   #before は it が実行される前に毎回実行される、そのためitが実行される毎にuserが増えていた
   before do
     @user = FactoryBot.create(:user)
-    # @task = FactoryBot.create(:task01)
     user = User.create(name: 'aaa',email: 'aaa@gmail.com', password: 'aaaaaa')
     # @task = FactoryBot.create(:task01)
   end
@@ -58,16 +57,15 @@ RSpec.describe Task, type: :model do
   end
 
   it "label 検索テスト" do
-    # task01 = Task.create(name: 'name01', content: 'content01', status: 'nowork',user_id: @user.id)
-    # task02 = Task.create(name: 'name02', content: 'content02', status: 'work',user_id: @user.id)
-    # task03 = Task.create(name: 'name03', content: 'content33', status: 'comp',user_id: @user.id)
-    # tasks = Task.all
-    # tasks = tasks.label_search("0")
-    # expect(tasks).to include task02
     # binding.pry
-  end
-
-  it "name,status,label検索テスト" do
+    label01 = Label.create(name: 'name01')
+    #ラベリングテーブルに対応するタスクIDを設定する必要がある、rspecで作成されていたidがあるので揃えた（1->10）
+    #あと、taskレコードを先に作成しないとlabelingレコードを生成出来なかった
+    # labeling01 = Labeling.create(task_id: 1, label_id: 1)
+    task01 = Task.create(name: 'name01', content: 'content01', status: 'comp',user_id: @user.id)
+    labeling01 = Labeling.create(task_id: 10, label_id: 1)
+    tasks = Task.label_search( 1 )
+    expect(tasks).to include task01
   end
 
 end

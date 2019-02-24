@@ -26,10 +26,15 @@ class Task < ApplicationRecord
   # statusから一致する条件を返す
   scope :status_search, -> status {where(status: status)}
   # label から一致する条件を返す
-  # scope :label_search, ->(label) do
-  #   task_ids = Labeling.where(label_id: label).pluck(:task_id)
-  #   where(id: task_ids) if label
-  # end
+  scope :label_search, ->(label) do
+    # task_ids = Labeling.where(label_id: label).pluck(:task_id)
+    # where(id: task_ids) if label
+    task_ids = Labeling.where(label_id: label)
+    task_ids = task_ids.pluck(:task_id)
+    if label
+      Task.where(id: task_ids)
+    end
+  end
 
   # name と statusから一致する条件を返す＞処理のロジックを変更して不要となった。
   # scope :name_status_search, -> (name, status) { where("name like ?", "%#{name}%").where(status: status)}

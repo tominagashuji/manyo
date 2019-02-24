@@ -86,13 +86,19 @@ class TasksController < ApplicationController
       @tasks = @tasks.status_search(params[:task][:status])
     end
     if params[:task][:label].present?
+      @tasks = @tasks.label_search(params[:task][:label])
+
+      #scopeの内容をコントローラーに書いて動作確認
       # @tasks = @tasks.label_search(params[:task][:label])
       # task_ids = Labeling.where(label_id: params[:task][:label]).pluck(:task_id)
-      task_ids = Labeling.where(label_id: params[:task][:label])
-      task_ids = task_ids.pluck(:task_id)
-      if params[:task][:label]
-        @tasks = @tasks.where(id: task_ids)
-      end
+
+      #上記の内容を分解して動作確認＞動作確認が取れたので再度scopeへ戻す（テストの為）
+      # task_ids = Labeling.where(label_id: params[:task][:label])
+      # task_ids = task_ids.pluck(:task_id)
+      # if params[:task][:label]
+      #   @tasks = @tasks.where(id: task_ids)
+      # end
+
     end
 
     @tasks = @tasks.page(params[:page]).per(PER)
