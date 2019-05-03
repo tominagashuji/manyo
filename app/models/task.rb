@@ -47,6 +47,7 @@ class Task < ApplicationRecord
 
   # アソシエーション
   belongs_to :user
+
   #step24 ラベル対応
   has_many :labelings
   has_many :labels, through: :labelings, source: :label, inverse_of: :tasks

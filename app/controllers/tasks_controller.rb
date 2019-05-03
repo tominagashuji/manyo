@@ -33,6 +33,7 @@ class TasksController < ApplicationController
 
   def create
     @task = current_user.tasks.new(task_params)
+    # binding.pry
 
     if @task.save
       redirect_to @task, notice: "タスク「#{@task.name}」を登録しました。"
@@ -116,7 +117,7 @@ class TasksController < ApplicationController
       :priority,
       :user_id,
       label_ids:[],
-      labels_attributes: %i(id name)
+      # labels_attributes: %i(id name)
       )
   end
 

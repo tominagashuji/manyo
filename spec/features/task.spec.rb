@@ -47,12 +47,14 @@ RSpec.feature "1.タスク管理機能",type: :feature do
     FactoryBot.create(:second_task)
     FactoryBot.create(:third_task)
     visit tasks_path
-    expect(page).to have_content 'testtesttest3'
-    expect(page).to have_content 'samplesample3'
-    expect(page).to have_content 'testtesttest2'
-    expect(page).to have_content 'samplesample2'
-    expect(page).to have_content 'testtesttest1'
-    expect(page).to have_content 'samplesample1'
+    tasks_list = pag.all('.task_title').map(&:text)
+    expect(task_ltitles[0]).to eq('testtesttest3')
+    # expect(page).to have_content 'testtesttest3'
+    # expect(page).to have_content 'samplesample3'
+    # expect(page).to have_content 'testtesttest2'
+    # expect(page).to have_content 'samplesample2'
+    # expect(page).to have_content 'testtesttest1'
+    # expect(page).to have_content 'samplesample1'
   end
 end
 
@@ -165,3 +167,4 @@ RSpec.feature "5.ページネーションテスト",type: :feature do
     expect(page).to have_content 'pagenation_name_01'
   end
 end
+

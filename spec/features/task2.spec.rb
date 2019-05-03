@@ -74,11 +74,17 @@ describe 'タスク管理機能', type: :feature do
           task03 = FactoryBot.create(:task, name: 'name03', created_at: '2001-01-03', user: user_a)
           visit tasks_path
         end
-
+        
         it 'タスクが作成日付の降順に並んでいるかのテスト' do
-          expect(page).to have_content 'name03'
-          expect(page).to have_content 'name02'
-          expect(page).to have_content 'name01'
+          visit tasks_path
+          save_and_open_page
+          task_titles = page.all('.task_title').map(&:text)
+          binding.pry
+          expect(task_titles[0]).to eq('ユーザーA')
+          expect(task_titles[1]).to eq('ユーザーB')
+          # expect(page).to have_content 'name03'
+          # expect(page).to have_content 'name02'
+          # expect(page).to have_content 'name01'
         end
       end
     end
@@ -94,6 +100,11 @@ describe 'タスク管理機能', type: :feature do
           task04 = FactoryBot.create(:task, name: 'name04', created_at: '2001-01-04', limit_on: '2001-02-04', status: 0, priority: 1, user: user_a)
           task05 = FactoryBot.create(:task, name: 'name05', created_at: '2001-01-05', limit_on: '2001-02-05', status: 1, priority: 2, user: user_a)
           task06 = FactoryBot.create(:task, name: 'name06', created_at: '2001-01-06', limit_on: '2001-02-06', status: 2, priority: 0, user: user_a)
+          # ラベル検索テストにてラベルレコードを作ってなかったので、作成した 
+          # let でやると良い
+          label01 = FactoryBot.create(:label, name: 'name01')
+          label02 = FactoryBot.create(:label, name: 'name02')
+          label03 = FactoryBot.create(:label, name: 'name03')
           visit tasks_path
         end
 
@@ -125,9 +136,14 @@ describe 'タスク管理機能', type: :feature do
 
         it 'ラベル検索テスト' do
           # save_and_open_page
-          # check 'task_label_1'
-          # click_on '検索する'
-          # expect(page).to have_content 'name01'
+          # choose "task_label_#{Label.first.id}"
+          # binding.pry
+          choose "task_label_#{Label.first.id}"
+          # find(:css, "#task_label_1[value='1']").set(true) ？？？出来なかった。。＞モデルテストで確認済み
+          # find(:css, "#task_label_13").set(true)
+          find(:css, "#task_label_#{Label.first.id}").set(true)
+          click_on '検索する'
+          expect(page).to have_content 'name01'
         end
 
         it '優先度ソートテスト' do
@@ -170,12 +186,11 @@ describe 'タスク管理機能', type: :feature do
             expect(page).to have_content 'ユーザーC'
           end
 
-          # it 'ユーザー詳細表示' do
-          #   save_and_open_page
-          #   click_on '詳細', match: :first
-          #   save_and_open_page
-          #   expect(page).to have_content 'name01'
-          # end
+          it 'ユーザー詳細表示' do
+            save_and_open_page
+            click_on '詳細', match: :first
+            expect(page).to have_content 'c@example.com'
+          end
 
           it 'ユーザー削除テスト' do
             click_on '削除', match: :first
