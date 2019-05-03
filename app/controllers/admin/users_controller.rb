@@ -1,6 +1,7 @@
 class Admin::UsersController < ApplicationController
   before_action :require_admin
 
+  # N+1問題対応（includeを使用するんだけど、ちょっと怪しい？）
   def index
     @users =User.select(:id, :name, :email, :created_at, :updated_at, :admin).includes(:tasks)
   end

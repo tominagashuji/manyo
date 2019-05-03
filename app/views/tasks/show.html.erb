@@ -3,4 +3,10 @@
 <p>名前：<%= @task.name %></p>
 <p>内容：<%= @task.content %></p>
 
+<h3>
+<% @task.labels.each do |label| %>
+  <label style="background-color: yellow"><%= label.name %></label>
+<% end %>
+</h3>
+
 <%= link_to 'タスク一覧画面に戻る', tasks_path %>

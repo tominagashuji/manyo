@@ -8,12 +8,16 @@ FactoryBot.define do
     limit_on { '20010101' }
     status { 'nowork' }
     priority { 'low' }
+    user_id { 1 }
   end
 
   factory :task01, class: Task do
     name { 'task01' }
     content { 'content01' }
+    limit_on { '20010101' }
     status { 'nowork' }
+    priority { 'low' }
+    user_id { 2 }
   end
 
   # 作成するテストデータの名前を「second_task」とします

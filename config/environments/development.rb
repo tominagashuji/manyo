@@ -10,8 +10,8 @@ Rails.application.configure do
   config.eager_load = false
 
   # Show full error reports.
-  # step22 にてadmin user以外はエラーにする対応
-  config.consider_all_requests_local = false
+  # step22 にてadmin user以外はエラーにする対応(trueがエラー詳細確認可能)
+  config.consider_all_requests_local = true
 
   # Enable/disable caching. By default caching is disabled.
   # Run rails dev:cache to toggle caching.
